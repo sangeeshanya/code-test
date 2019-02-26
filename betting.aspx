@@ -7,7 +7,7 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server">
+     <form id="form1" runat="server">
         <div>
         </div>
         <p>
@@ -22,7 +22,8 @@
 &nbsp;</p>
        
         <p>
-            &nbsp;</p>
+            <asp:Label ID="Label2" runat="server" Text="Betting amount is $50"></asp:Label>
+        </p>
         <p>
             <asp:Button ID="placebet" runat="server" OnClick="placebet_Click" Text="place bet" />
         </p>
