@@ -15,18 +15,18 @@ namespace WebApplication2
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
-        string username;
+       string username;
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
-        
+       
 
         protected void login_Click(object sender, EventArgs e)
         {
             OleDbConnection con = new OleDbConnection();
             OleDbCommand cmd = new OleDbCommand();
-            con.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\sanka\Desktop\userdetails.accdb";
+            con.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\sanka\source\repos\WebApplication2\App_Data\userdetails.accdb";
             cmd.Connection = con;
             con.Open();
             cmd.CommandText = "select * from userdetails where Username = '" + userid.Text + "'and Password = '" + password.Text + "'";
@@ -40,11 +40,12 @@ namespace WebApplication2
             if (count == 1)
             {
                 MessageBox.Show("Login successful");
-                this.Hide();
+               // this.Hide();
                 username = userid.Text;
                 betting bet = new betting();
                 bet.getusername(username.ToString());
-                bet.Show();
+                // bet.Show();
+                Response.Redirect("betting.aspx");
                 
                 
                
