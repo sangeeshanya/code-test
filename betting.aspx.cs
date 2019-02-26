@@ -17,45 +17,47 @@ namespace WebApplication2
         string usernam;
         int bal;
         int match = 1; // let assume match = 1 is betting won 
-        
-       
+
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
-       public void getusername(string username)
-       {
+        public void getusername(string username)
+        {
             usernam = username.ToString();
-       }
+        }
         protected void placebet_Click(object sender, EventArgs e)
         {
             OleDbConnection con = new OleDbConnection();
             OleDbCommand cmd = new OleDbCommand();
-            con.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\sanka\Desktop\userdetails.accdb";
+            con.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\sanka\source\repos\WebApplication2\App_Data\userdetails.accdb";
             cmd.Connection = con;
-            
-                con.Open();
-                cmd.CommandText = "select * from userdetails where Username = '" + usernam + "'";
-                OleDbDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
-                {
-                    string balance = (reader["amount"].ToString());
-                    bal = int.Parse(balance);
+
+            con.Open();
+            cmd.CommandText = "select * from userdetails where Username = '" + usernam + "'";
+            OleDbDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                string balance = (reader["amount"].ToString());
+                bal = int.Parse(balance);
                 if (bal < 50)
                 {
                     MessageBox.Show("You have insufficient bal");
                 }
-                    MessageBox.Show("Your bal " + bal);
-                else{
+                MessageBox.Show("Your bal " + bal);
+            
+               else
+                {
 
 
 
                     if (match == 1)
                     {
                         MessageBox.Show("You won the bet");
-                        bal = bal + 50;
+                        bal = bal + (2 * 50);
 
                     }
                     else
@@ -74,11 +76,12 @@ namespace WebApplication2
                 }
 
 
-                }
-                
-            
-            
 
+
+
+
+
+            }
         }
     }
 }
